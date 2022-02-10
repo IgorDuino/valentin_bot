@@ -1,24 +1,23 @@
 from telebot.types import InlineKeyboardButton, InlineKeyboardMarkup
+from tools.users import User
+import texts
 
 
-def main_menu(a=False):
-    if a:
-        keyboard = InlineKeyboardMarkup()
-        keyboard.add(
-            InlineKeyboardButton(text="Да, отправить анонимно ❤🐱‍💻", callback_data="send_valentin_anonymous"))
-        keyboard.add(
-            InlineKeyboardButton(text="Да, отправить НЕ анонимно ❤", callback_data="send_valentin_public"))
-        keyboard.add(
-            InlineKeyboardButton(text="Нет, открыть главное меню", callback_data="main_menu"))
+def invite_menu(to_user: User) -> InlineKeyboardMarkup:
+    keyboard = InlineKeyboardMarkup()
+    keyboard.add(
+        InlineKeyboardButton(text=texts.yes_send_anonymous, callback_data=f"send_valentin_anonymous_{to_user.tg_id}"))
+    keyboard.add(
+        InlineKeyboardButton(text=texts.yes_send_public, callback_data=f"send_valentin_public_{to_user.tg_id}"))
+    keyboard.add(
+        InlineKeyboardButton(text=texts.no_open_main_menu, callback_data="main_menu"))
 
-        return keyboard
-    else:
-        keyboard = InlineKeyboardMarkup()
-        keyboard.add(
-            InlineKeyboardButton(text="Моя ссылка", callback_data="my_link"))
-        keyboard.add(
-            InlineKeyboardButton(text="Да, отправить НЕ анонимно ❤", callback_data="send_valentin_public"))
-        keyboard.add(
-            InlineKeyboardButton(text="Нет, открыть главное меню", callback_data="main_menu"))
+    return keyboard
 
-        return keyboard
+
+def is_correct_valentine() -> InlineKeyboardMarkup:
+    keyboard = InlineKeyboardMarkup()
+    keyboard.add(InlineKeyboardButton(text=texts.correct_valentine, callback_data="correct_valentine"))
+    keyboard.add(InlineKeyboardButton(text=texts.incorrect_valentine, callback_data="incorrect_valentine"))
+
+    return keyboard

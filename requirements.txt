@@ -9,3 +9,4 @@ SQLAlchemy-serializer==1.4.1
 urllib3==1.26.8
 
 russiannames~=1.0
+qrcode
