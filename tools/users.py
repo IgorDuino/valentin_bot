@@ -15,6 +15,7 @@ class User(SqlAlchemyBase, SerializerMixin):
     link = sqlalchemy.Column(sqlalchemy.String, unique=True, nullable=False)
     first_name = sqlalchemy.Column(sqlalchemy.Integer, unique=False, nullable=True)
     second_name = sqlalchemy.Column(sqlalchemy.Integer, unique=False, nullable=True)
+    is_admin = sqlalchemy.Column(sqlalchemy.Boolean, unique=False, default=False)
     full_name = sqlalchemy.Column(sqlalchemy.Integer, unique=False, nullable=True)
     gender = sqlalchemy.Column(sqlalchemy.Boolean, unique=False, default=False)
     from_cards = relationship("ValentineCard", back_populates='from_user', foreign_keys='ValentineCard.from_user_id')

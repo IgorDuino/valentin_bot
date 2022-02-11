@@ -36,8 +36,9 @@ def create_new_valentine_text(message: telebot.types.Message):
 def create_new_valentine_background(message: telebot.types.Message):
     valentine: ValentineCard = temp_valentins.get(message.from_user.id)
     if valentine is None:
-        bot.send_message(message.from_user.id,
-                         'Ошибочка :(\nПерезапусти меня - /start или открой ссылку друга(подруги) заного')
+        bot.edit_message_text(texts.simple_error,
+                              message.from_user.id,
+                              message.id)
         bot.clear_step_handler_by_chat_id(message.from_user.id)
         return
 
@@ -47,6 +48,16 @@ def create_new_valentine_background(message: telebot.types.Message):
                                 message.id,
                                 reply_markup=menu.is_correct_valentine()
                                 )
+
+
+@bot.message_handler(commands=['admin'])
+def admin(message: telebot.types.Message):
+    user = get_user_by_tg_id(message.from_user.id)
+    if not user.is_admin:
+        bot.send_message(user.tg_id, texts.not_admin)
+        return
+
+    bot.send_message(user.tg_id, texts.admin, reply_markup=menu.admin_menu())
 
 
 @bot.message_handler(commands=['start'])
