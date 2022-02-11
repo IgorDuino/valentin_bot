@@ -32,6 +32,19 @@ def get_user_by_tg_id(tg_id: int | str) -> User | bool:
     return user if user else False
 
 
+def get_all_users() -> list:
+    session = db_session.create_session()
+    users = session.query(User).all()
+
+    return users
+
+
+def make_admin(user: User):
+    session = db_session.create_session()
+    user.is_admin = True
+    session.commit()
+
+
 def create_user(tg_id, username=None, first_name=None, second_name=None, full_name=None) -> User:
     user = User()
     user.tg_id = tg_id

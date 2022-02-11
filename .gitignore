@@ -1,0 +1,6 @@
+/venv
+/.idea
+/img/temp
+secret.py
+pillow_test.py
+

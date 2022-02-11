@@ -22,9 +22,10 @@ def is_correct_valentine() -> InlineKeyboardMarkup:
 
     return keyboard
 
+
 def admin_menu() -> InlineKeyboardMarkup:
     keyboard = InlineKeyboardMarkup()
     keyboard.add(InlineKeyboardButton(text=texts.admin_send_all_valentines, callback_data="admin_send_all_valentines"))
-    keyboard.add(InlineKeyboardButton(text=texts.close, callback_data="main_menu"))
+    keyboard.add(InlineKeyboardButton(text=texts.add_new_admin, callback_data="add_new_admin"))
 
     return keyboard

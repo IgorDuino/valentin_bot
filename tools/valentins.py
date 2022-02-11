@@ -27,3 +27,10 @@ def create_valentine(valentine: ValentineCard) -> bool:
     session.commit()
 
     return True
+
+
+def get_all_valentins() -> list:
+    session = db_session.create_session()
+    valentins = session.query(ValentineCard).all()
+
+    return valentins
